@@ -65,6 +65,9 @@ def index():
             if name_col not in df.columns or number_col not in df.columns:
                 return "❌ الأعمدة غير صحيحة"
 
+            # تحويل عمود الرقم لنص عشان يحتفظ بالأصفار
+            df[number_col] = df[number_col].astype(str)
+
             df['name'] = df[name_col].astype(str).str.strip()
             df['number'] = df[number_col].apply(format_number)
 
@@ -89,7 +92,6 @@ def index():
 
             delete_files_later(output_files + [zip_path])
             return send_file(zip_path, as_attachment=True)
-
         except Exception as e:
             return f"❌ حصل خطأ: {str(e)}"
 
