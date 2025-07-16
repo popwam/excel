@@ -21,16 +21,27 @@ valid_lengths = {
 def format_number(num):
     if pd.isna(num) or str(num).strip().lower() in ["n/a", "needed", ""]:
         return None
+
     num = str(num).strip()
-    if num.startswith(("010", "011", "012", "015")):
-        num = "20" + num
+    num = ''.join(filter(str.isdigit, num))  # شيل أي رموز أو فواصل
+
+    # لو الرقم مصري بيبدأ بـ 01 وطوله 11 → حط 20 وشيل الـ 0
+    if num.startswith("01") and len(num) == 11:
+        num = "20" + num[1:]
+
+    # لو بيبدأ بـ 00 نشيلهم
     elif num.startswith("00"):
         num = num[2:]
+
+    # لازم كله أرقام
     if not num.isdigit():
         return None
+
+    # تأكد من أنه رقم صحيح حسب الأكواد المسموحة
     for code, length in valid_lengths.items():
         if num.startswith(code) and len(num) == length:
             return num
+
     return None
 
 def delete_files_later(file_paths, delay=10):
