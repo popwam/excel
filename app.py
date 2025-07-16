@@ -95,19 +95,62 @@ def index():
 
     return render_template_string("""
     <!DOCTYPE html>
-    <html>
-    <head><title>تنظيف الأرقام</title></head>
-    <body style="font-family:Tahoma;direction:rtl;text-align:right;">
-        <h2>📄 رفع ملف Excel لتنظيف الأرقام</h2>
+    <html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <title>تنظيف الأرقام من ملف Excel</title>
+        <style>
+            body {
+                background-color: #f9f9f9;
+                font-family: 'Tahoma', sans-serif;
+                max-width: 600px;
+                margin: 50px auto;
+                padding: 20px;
+                direction: rtl;
+                text-align: right;
+                border: 1px solid #ccc;
+                border-radius: 12px;
+                box-shadow: 0 0 12px rgba(0,0,0,0.05);
+            }
+            h2 {
+                color: #444;
+            }
+            input[type="text"], input[type="file"] {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0 20px 0;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                font-size: 15px;
+            }
+            button {
+                background-color: #28a745;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+            button:hover {
+                background-color: #218838;
+            }
+            label {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>📄 تنظيف الأرقام من ملف Excel</h2>
         <form method="POST" enctype="multipart/form-data">
-            <label>اختار ملف Excel:</label><br>
-            <input type="file" name="file" required><br><br>
+            <label>📂 اختار ملف Excel:</label>
+            <input type="file" name="file" required>
 
-            <label>اسم عمود الاسم (زي name):</label><br>
-            <input type="text" name="name_col" required><br><br>
+            <label>📛 اسم عمود الاسم (مثلاً: name):</label>
+            <input type="text" name="name_col" required>
 
-            <label>اسم عمود الرقم (زي number):</label><br>
-            <input type="text" name="number_col" required><br><br>
+            <label>📞 اسم عمود الرقم (مثلاً: number):</label>
+            <input type="text" name="number_col" required>
 
             <button type="submit">🚀 ابدأ التنظيف</button>
         </form>
