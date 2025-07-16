@@ -123,10 +123,26 @@ def index():
                     <p class="count">❌ المرفوضة: {{rejected}}</p>
 
                     <a class="button" href="/download" download>⬇️ تحميل النتائج الصالحة</a>
-
                     {% if not rejected_table.empty %}
                         <h3>❌ الصفوف المرفوضة:</h3>
-                        {{ rejected_table.to_html(classes="table", index=False) }}
+                        <table class="simple-table">
+                            <thead>
+                                <tr>
+                                    {% for col in rejected_table.columns %}
+                                        <th>{{ col }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in rejected_table.values %}
+                                    <tr>
+                                        {% for cell in row %}
+                                            <td>{{ cell }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     {% endif %}
                 </body>
                 </html>
